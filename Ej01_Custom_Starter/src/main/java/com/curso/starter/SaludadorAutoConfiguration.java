@@ -1,0 +1,37 @@
+package com.curso.starter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.curso.util.Saludador;
+
+//
+// src/main/resources/META-INF/spring.factories
+//
+
+@Configuration
+@ConditionalOnClass(Saludador.class)
+@EnableConfigurationProperties(SaludadorProperties.class)
+public class SaludadorAutoConfiguration {
+
+	@Autowired
+	private SaludadorProperties saludadorProperties;
+
+	@Bean
+	@ConditionalOnMissingBean
+	public Saludador saludador() {
+		String mensaje = saludadorProperties.getMensaje();
+		if(mensaje==null) {
+			mensaje = "Hola que tal, ";
+		}
+		return new Saludador(mensaje);
+	}
+
+}
+
+
+
