@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class Aplicacion extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
+		System.out.println("HOLA RADIOLA");
 		SpringApplication.run(Aplicacion.class, args);
 	}
 

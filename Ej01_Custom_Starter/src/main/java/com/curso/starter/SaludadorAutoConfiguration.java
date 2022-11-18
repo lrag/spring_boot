@@ -21,6 +21,7 @@ public class SaludadorAutoConfiguration {
 	@Autowired
 	private SaludadorProperties saludadorProperties;
 
+	//spring.main.allow-bean-definition-overriding
 	@Bean
 	@ConditionalOnMissingBean
 	public Saludador saludador() {
