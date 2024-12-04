@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.curso.endpoint.PedidosRest;
 import com.curso.modelo.entidad.Cliente;
 import com.curso.modelo.entidad.DetallePedido;
 import com.curso.modelo.entidad.Pedido;
@@ -30,7 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 class PedidosRestTestIntegracion {
 
 	@MockBean ClientesRestProxy clientesRestProxy;
-	@MockBean ProductosRestProxy productosRestProxy;		
+	@MockBean ProductosRestProxy productosRestProxy;	
 	
 	@Autowired
 	MockMvc mockMvc;
@@ -40,6 +41,7 @@ class PedidosRestTestIntegracion {
 
 	//@Test
 	void listarPedidos() throws Exception {	
+		
 		mockMvc
 			.perform(get("/pedidos"))
 			.andExpect(status().isOk())

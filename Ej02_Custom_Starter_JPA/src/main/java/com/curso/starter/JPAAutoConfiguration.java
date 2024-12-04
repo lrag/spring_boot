@@ -37,7 +37,7 @@ public class JPAAutoConfiguration {
 		ds.setPassword(dataSourceProperties.getPassword());		
 		return ds;
 	}
-
+	
 }
 
 

@@ -21,6 +21,7 @@ import com.curso.modelo.entidad.Cliente;
 import com.curso.modelo.entidad.DetallePedido;
 import com.curso.modelo.entidad.Pedido;
 import com.curso.modelo.entidad.Producto;
+import com.curso.modelo.negocio.GestorPedidos;
 import com.curso.modelo.persistencia.PedidoRepositorio;
 
 @SpringBootTest
@@ -28,12 +29,15 @@ import com.curso.modelo.persistencia.PedidoRepositorio;
 class PedidosRestTestUnitario {
 
 	@MockBean
-	PedidoRepositorio pedidoRepositorio;
-
+	PedidoRepositorio pedidoRepositorio; 
+	
+	@MockBean
+	GestorPedidos gestorPedidos;
+	
 	@Autowired
 	MockMvc mockMvc;
 
-	//@Test
+	@Test
 	void listarPedidos() throws Exception {
 		
 		Cliente c1 = new Cliente(1,"cli1@correo.es", "Ringo Starr", "1234");

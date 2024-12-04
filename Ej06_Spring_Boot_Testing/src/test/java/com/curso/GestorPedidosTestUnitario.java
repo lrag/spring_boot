@@ -1,14 +1,8 @@
 package com.curso;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -38,6 +32,7 @@ class GestorPedidosTestUnitario {
 	@Test
 	void aceptarPedido() throws Exception {
 		
+		//DADOS ESTOS DATOS
 		Cliente c1 = new Cliente();
 		c1.setLogin("ringo@starr.com");
 		
@@ -51,7 +46,7 @@ class GestorPedidosTestUnitario {
 		detalles1.add(new DetallePedido(1, 10d, 1, pedidoRecibido, pr1));
 		detalles1.add(new DetallePedido(2, 20d, 1, pedidoRecibido, pr2));
 
-		//PedidoRepositorio es un STUB	
+		//PedidoRepositorio es un DUMMIE	
 		
 		Mockito
 			.when(clientesRestProxy.buscar(c1.getLogin()))
@@ -60,18 +55,23 @@ class GestorPedidosTestUnitario {
 		Mockito
 			.when(productosRestProxy.buscar(pr1.getCodigo()))
 			.thenReturn(new Producto(1, "PROD-1", "Chisme", 10d));	
+		
 		Mockito
 			.when(productosRestProxy.buscar(pr2.getCodigo()))
 			.thenReturn(new Producto(2, "PROD-2", "Fleje", 20d));	
+
+		//Y UN GESTOR_PEDIDOS
 		
+		//CUANDO
 		Pedido pedidoAlta = gestorPedidos.altaPedido(pedidoRecibido);
 		
+		//ENTONCES
 		Assertions.assertAll(
 				() -> Assertions.assertNotNull(pedidoAlta.getCodigo()),
 				() -> Assertions.assertEquals(pedidoAlta.getTotal(), 30),
 				() -> Assertions.assertEquals(pedidoAlta.getCliente().getNombre(), "Ringo Starr"),
 				() -> Assertions.assertEquals(pedidoAlta.getDetalles().get(0).getProducto().getNombre(), "Chisme"),
-				() -> Assertions.assertEquals(pedidoAlta.getDetalles().get(0).getProducto().getNombre(), "Fleje")
+				() -> Assertions.assertEquals(pedidoAlta.getDetalles().get(1).getProducto().getNombre(), "Fleje")
 			);	
 	}
 }
