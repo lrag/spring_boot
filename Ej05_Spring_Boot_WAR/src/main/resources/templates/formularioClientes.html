@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta>
+	<title>Clientes</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<script type="application/javascript">
+
+function vaciarFormulario(){
+	document.getElementById("idCliente").value = ""
+	document.getElementById("nombre").value    = ""
+	document.getElementById("direccion").value = ""
+	document.getElementById("telefono").value  = ""
+	document.getElementById("correoE").value   = ""
+	document.getElementById("activo").value    = ""
+	document.getElementById("notas").value     = ""	
+}
+
+function enviarPeticion(metodo, action){
+	let formulario = document.getElementById("formulario")
+	formulario.method = metodo;
+	formulario.action = action;
+}
+
+</script>
+
+<body>
+
+	<div th:replace="fragmentos/cabecera.html"></div>
+	<div th:replace="fragmentos/menu.html"></div>
+	
+	<div class="text-center mt-4 mb-4">
+		<h2>Formulario de clientes</h2>
+	</div>
+	
+	<form id="formulario" th:object="${cliente}">
+	
+		<div class="text-center mt-4 mb-4">
+			<input type="submit" class="btn btn-primary" value="Insertar"  onclick="enviarPeticion('POST','insertarCliente')"/> 
+			<input type="submit" class="btn btn-primary" value="Modificar" onclick="enviarPeticion('POST','modificarCliente')"/> 
+			<input type="submit" class="btn btn-danger"  value="Borrar"    onclick="enviarPeticion('POST','borrarCliente')"/> 
+			<input type="button" class="btn btn-warning" value="Vaciar"    onclick="vaciarFormulario()"/> 
+			<input type="submit" class="btn btn-warning" value="Cancelar"  onclick="enviarPeticion('GET','verListadoClientes')"/> 
+		</div>
+		
+		<input type="hidden" th:field="*{id}" id="idCliente"/>
+			
+		<div class="row">
+		    <div class="col-sm-12 offset-sm-0 col-md-8 offset-md-2">
+		        
+				<div class="row">
+				    <div class="col-sm-12 col-md-2 mt-1">
+				        <label for="nombre">Nombre</label>
+				    </div>
+				    <div class="col-sm-12 col-md-10 mt-1">
+		                <input type="text" th:field="*{nombre}" id="codigo" class="form-control"/>
+						<span th:errors="*{nombre}" class="text-danger"></span>				    
+				    </div>
+				    
+				    <div class="col-sm-12 col-md-2 mt-1">
+				        <label for="direccion">Dirección</label>
+				    </div>
+				    <div class="col-sm-12 col-md-10 mt-1">
+		                <input type="text" th:field="*{direccion}" id="codigo" class="form-control"/>
+						<span th:errors="*{direccion}" class="text-danger"></span>				    
+				    </div>                 
+				    
+				    <div class="col-sm-12 col-md-2 mt-1">
+				        <label for="telefono">Teléfono</label>
+				    </div>
+				    <div class="col-sm-12 col-md-10 mt-1">
+		                <input type="text" th:field="*{telefono}" id="codigo" class="form-control"/>
+						<span th:errors="*{telefono}" class="text-danger"></span>				    
+				    </div>
+				    
+				    <div class="col-sm-12 col-md-2 mt-1">
+				        <label for="correoE">Correo E.</label>
+				    </div>
+				    <div class="col-sm-12 col-md-10 mt-1">
+		                <input type="text" th:field="*{correoE}" id="codigo" class="form-control"/>
+						<span th:errors="*{correoE}" class="text-danger"></span>				    
+				    </div>
+	
+				    <div class="col-sm-12 col-md-2 mt-1">
+				        <label for="activo">Activo</label>
+				    </div>
+				    <div class="col-sm-12 col-md-10 mt-1">
+				     	<input type="checkbox" th:field="*{activo}"/>
+				    </div>
+				
+				    <div class="col-sm-12 col-md-2 mt-1">
+				        <label for="notas">Notas</label>
+				    </div>
+				    <div class="col-sm-12 col-md-10 mt-1">
+				    	<textarea th:field="*{notas}" id="notas" class="form-control"></textarea>
+				    </div>
+				</div>    
+		        
+		    </div>
+		</div>	
+		
+	</form>
+
+</body>
+</html>

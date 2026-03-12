@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta>
+	<title>Clientes</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+
+	<div th:replace="fragmentos/cabecera.html"></div>
+	<div th:replace="fragmentos/menu.html"></div>
+	
+	<div class="text-center mt-4 mb-4">
+		<h2>Listado de clientes</h2>
+	</div>
+	
+	<div class="text-center mt-4 mb-4">
+		<form method="get" action="formularioClientes">
+			<input type="submit" class="btn btn-primary" value="Nuevo"/> 
+		</form>
+	</div>	
+	
+	<div class="row">
+	    <div class="col-sm-12 offset-sm-0 col-md-8 offset-md-2">
+	        
+			<table class="table table-hover table-striped">    
+			    <thead>
+			        <tr>
+			            <th>Nombre</th>
+			            <th>Dirección</th>
+			            <th>Teléfono</th>
+			            <th>Correo E.</th>
+			            <th>Activo</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+					<tr th:each="cliente: ${listaClientes}">
+						<td>
+							<!--
+							GET seleccionarCliente?idCliente=X  
+							--> 
+							<a th:href="@{seleccionarCliente(idCliente=${cliente.id})}" th:text="${cliente.nombre}"></a>
+						</td>			
+						<td th:text="${cliente.direccion}"/>			
+						<td th:text="${cliente.telefono}"/>			
+						<td th:text="${cliente.correoE}"/>			
+						<td th:text="${cliente.activo}"/>			
+					</tr> 	
+					<tr th:if="${listaClientes.size==0}">
+						<td colspan="4">
+							No hay detalles
+						</td>
+					</tr>				
+			    </tbody>
+			</table> 
+	        
+	    </div>
+	</div>	
+
+</body>
+</html>

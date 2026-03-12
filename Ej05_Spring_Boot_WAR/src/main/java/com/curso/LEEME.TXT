@@ -1,0 +1,23 @@
+
+- Añadir en el fichero pom.xml:
+
+  <packaging>war</packaging>
+
+- en <build>
+
+  <finalName>${artifactId}</finalName>
+
+- Sobreescribimos el starter de tomcat para que sea provided
+
+  <dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-tomcat</artifactId>
+     <scope>provided</scope>
+  </dependency>
+
+- En la clase marcada con @SpringBootApplication:
+
+  @SpringBootApplication
+  public class Aplicacion extends SpringBootServletInitializer
+  
+ - Y generar el artefacto con mvn clean package
