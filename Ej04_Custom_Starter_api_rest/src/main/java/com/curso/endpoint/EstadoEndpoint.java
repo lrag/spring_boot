@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EstadoEndpoint {
 
 	@GetMapping(path="/estado", produces = "application/json")
-	ResponseEntity<Map<String, Object>> getEstado(){
+	public ResponseEntity<Map<String, Object>> getEstado(){
 		Map<String, Object> datos = new HashMap<>();
 		datos.put("memoria total", Runtime.getRuntime().totalMemory());
 		datos.put("memoria libre", Runtime.getRuntime().freeMemory());
